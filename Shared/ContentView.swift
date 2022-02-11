@@ -8,9 +8,28 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var password = "Password"
+    @State private var length: Int = 16
+    
+    private let generator = PasswordGenerator()
+    
     var body: some View {
-        Text("Hello, world!")
+        VStack {
+            Text(password)
+                .textSelection(.enabled)
+                .padding()
+            HStack {
+                Stepper("Length", value: $length, in: 1...99)
+                Text(String(length))
+            }
             .padding()
+          
+            Button(action: {
+                password = generator.generate(length: length)
+            }) {
+                Text("Generate")
+            }
+        }.frame(minWidth: 200, minHeight: 200)
     }
 }
 

@@ -17,6 +17,8 @@
 		CA3D768E27B6C5FC0082C6A3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3D766427B6C5F90082C6A3 /* ContentView.swift */; };
 		CA3D768F27B6C5FC0082C6A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA3D766527B6C5FC0082C6A3 /* Assets.xcassets */; };
 		CA3D769027B6C5FC0082C6A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA3D766527B6C5FC0082C6A3 /* Assets.xcassets */; };
+		CA3D76A027B6C64F0082C6A3 /* PasswordGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3D769F27B6C64F0082C6A3 /* PasswordGenerator.swift */; };
+		CA3D76A127B6C64F0082C6A3 /* PasswordGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3D769F27B6C64F0082C6A3 /* PasswordGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,7 @@
 		CA3D768327B6C5FC0082C6A3 /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA3D768727B6C5FC0082C6A3 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		CA3D768927B6C5FC0082C6A3 /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
+		CA3D769F27B6C64F0082C6A3 /* PasswordGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +103,7 @@
 				CA3D766327B6C5F90082C6A3 /* PassGenApp.swift */,
 				CA3D766427B6C5F90082C6A3 /* ContentView.swift */,
 				CA3D766527B6C5FC0082C6A3 /* Assets.xcassets */,
+				CA3D769F27B6C64F0082C6A3 /* PasswordGenerator.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -301,6 +305,7 @@
 			files = (
 				CA3D768D27B6C5FC0082C6A3 /* ContentView.swift in Sources */,
 				CA3D768B27B6C5FC0082C6A3 /* PassGenApp.swift in Sources */,
+				CA3D76A027B6C64F0082C6A3 /* PasswordGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +315,7 @@
 			files = (
 				CA3D768E27B6C5FC0082C6A3 /* ContentView.swift in Sources */,
 				CA3D768C27B6C5FC0082C6A3 /* PassGenApp.swift in Sources */,
+				CA3D76A127B6C64F0082C6A3 /* PasswordGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
