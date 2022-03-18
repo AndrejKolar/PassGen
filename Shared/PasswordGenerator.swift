@@ -12,7 +12,8 @@ struct PasswordGenerator {
     private let characters: [String] = [
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
         "abcdefghijklmnopqrstuvwxyz",
-        "0123456789"
+        "0123456789",
+        "!@#$%^&*()+_-=}{[]|:;\"/?.><,`~"
     ]
     
     public func generate(length: Int = 9) -> String {
