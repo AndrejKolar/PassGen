@@ -8,6 +8,9 @@
 import Foundation
 
 struct PasswordGenerator {
+    struct Constants {
+        static let defaultLength = 16
+    }
     
     private let characters: [String] = [
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
@@ -16,8 +19,10 @@ struct PasswordGenerator {
         "!@#$%^&*()+_-=}{[]|:;\"/?.><,`~"
     ]
     
-    public func generate(length: Int = 9) -> String {
-        let password = (0..<length)
+    public func generate(length: Int? = nil) -> String {
+        let passwordLength = length ?? Constants.defaultLength
+        
+        let password = (0..<passwordLength)
             .compactMap { _ in (0..<characters.count).randomElement() }
             .compactMap { characters[$0].randomElement() }
         
