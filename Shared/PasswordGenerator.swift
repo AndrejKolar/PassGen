@@ -8,23 +8,41 @@
 import Foundation
 
 struct PasswordGenerator {
-    struct Constants {
-        static let defaultLength = 16
+    public struct Defaults {
+        static let lenght = 16
+        static let options: Set<PasswordType> = [
+            PasswordType.uppercase,
+            PasswordType.lowercase,
+            PasswordType.numbers,
+            PasswordType.symbols
+        ]
     }
     
-    private let characters: [String] = [
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        "abcdefghijklmnopqrstuvwxyz",
-        "0123456789",
-        "!@#$%^&*()+_-=}{[]|:;\"/?.><,`~"
-    ]
+    public struct Options {
+        let upperCase: Bool
+        let lowerCase: Bool
+        let numbers: Bool
+        let symbols: Bool
+    }
     
-    public func generate(length: Int? = nil) -> String {
-        let passwordLength = length ?? Constants.defaultLength
+    enum PasswordType: String {
+        case uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        case lowercase = "abcdefghijklmnopqrstuvwxyz"
+        case numbers = "0123456789"
+        case symbols = "!@#$%^&*()+_-=}{[]|:;\"/?.><,`~"
+    }
+    
+    public func generate(length: Int? = nil, options: Set<PasswordType>? = nil) -> String {
+        let passwordLength = length ?? Defaults.lenght
+        let passwordOptions = options ?? Defaults.options
+        
+        let charactersArray = passwordOptions.map {
+            $0.rawValue
+        }
         
         let password = (0..<passwordLength)
-            .compactMap { _ in (0..<characters.count).randomElement() }
-            .compactMap { characters[$0].randomElement() }
+            .compactMap { _ in charactersArray.randomElement() }
+            .compactMap { $0.randomElement() }
         
         return String(password)
     }

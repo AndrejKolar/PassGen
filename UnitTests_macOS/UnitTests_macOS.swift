@@ -31,7 +31,7 @@ class UnitTests_macOS: XCTestCase {
     func testDefaultPasswordLength() {
         XCTAssertEqual(
             sut.generate().count,
-            PasswordGenerator.Constants.defaultLength,
+            PasswordGenerator.Defaults.lenght,
             "Password is not the default length"
         )
     }
@@ -43,5 +43,52 @@ class UnitTests_macOS: XCTestCase {
             length,
             "Password is not the passed in length"
         )
+    }
+    
+    func testDefaultOptions() {
+        let password = sut.generate()
+        let isNumeric = checkCharacters(password, type: .numbers)
+        let isLowercase = checkCharacters(password, type: .lowercase)
+        let isUppercase = checkCharacters(password, type: .uppercase)
+        let isSymbol = checkCharacters(password, type: .symbols)
+        
+        XCTAssertFalse(isNumeric, "Password should not contain only numbers")
+        XCTAssertFalse(isLowercase, "Password should not contain only lowercase letters")
+        XCTAssertFalse(isUppercase, "Password should not contain only uppercase letters")
+        XCTAssertFalse(isSymbol, "Password should not contain only symbols")
+    }
+    
+    func testOnlyNumbers() {
+        let password = sut.generate(options: [.numbers])
+        let isNumeric = checkCharacters(password, type: .numbers)
+        XCTAssertTrue(isNumeric, "Password is not number only")
+    }
+    
+    func testOnlyLowerCase() {
+        let password = sut.generate(options: [.lowercase])
+        let isLowercase = checkCharacters(password, type: .lowercase)
+        XCTAssertTrue(isLowercase, "Password should contain only lowercase letters")
+    }
+    
+    func testOnlyUppercase() {
+        let password = sut.generate(options: [.uppercase])
+        let isUppercase = checkCharacters(password, type: .uppercase)
+        XCTAssertTrue(isUppercase, "Password should contain only uppercase letters")
+    }
+    
+    func testOnlySymbols() {
+        let password = sut.generate(options: [.symbols])
+        let isSymbol = checkCharacters(password, type: .symbols)
+        
+        XCTAssertTrue(isSymbol, "Password should contain only symbols")
+    }
+    
+    // Helpers
+    
+    private func checkCharacters(_ password: String, type: PasswordGenerator.PasswordType) -> Bool {
+        let typeCharacterSet = CharacterSet(charactersIn: type.rawValue)
+        let passwordCharacterSet = CharacterSet(charactersIn: password)
+        return passwordCharacterSet.isSubset(of: typeCharacterSet)
+        
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var password = "Password"
-    @State private var length: Int = PasswordGenerator.Constants.defaultLength
+    @State private var length: Int = PasswordGenerator.Defaults.lenght
     
     private let generator = PasswordGenerator()
     
