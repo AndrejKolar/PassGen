@@ -85,7 +85,7 @@ class UnitTests_macOS: XCTestCase {
     
     // Helpers
     
-    private func checkCharacters(_ password: String, type: PasswordGenerator.PasswordType) -> Bool {
+    private func checkCharacters(_ password: String, type: PasswordGenerator.CharacterType) -> Bool {
         let typeCharacterSet = CharacterSet(charactersIn: type.rawValue)
         let passwordCharacterSet = CharacterSet(charactersIn: password)
         return passwordCharacterSet.isSubset(of: typeCharacterSet)

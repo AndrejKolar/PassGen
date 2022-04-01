@@ -10,11 +10,11 @@ import Foundation
 struct PasswordGenerator {
     public struct Defaults {
         static let lenght = 16
-        static let options: Set<PasswordType> = [
-            PasswordType.uppercase,
-            PasswordType.lowercase,
-            PasswordType.numbers,
-            PasswordType.symbols
+        static let options: Set<CharacterType> = [
+            .uppercase,
+            .lowercase,
+            .numbers,
+            .symbols
         ]
     }
     
@@ -25,14 +25,14 @@ struct PasswordGenerator {
         let symbols: Bool
     }
     
-    enum PasswordType: String {
+    enum CharacterType: String {
         case uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         case lowercase = "abcdefghijklmnopqrstuvwxyz"
         case numbers = "0123456789"
         case symbols = "!@#$%^&*()+_-=}{[]|:;\"/?.><,`~"
     }
     
-    public func generate(length: Int? = nil, options: Set<PasswordType>? = nil) -> String {
+    public func generate(length: Int? = nil, options: Set<CharacterType>? = nil) -> String {
         let passwordLength = length ?? Defaults.lenght
         let passwordOptions = options ?? Defaults.options
         
