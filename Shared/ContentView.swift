@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var password = "Password"
-    @State private var length: Int = PasswordGenerator.Defaults.lenght
+    @State private var length: Int = PasswordGenerator.Defaults.length
     
     private let generator = PasswordGenerator()
     
@@ -25,7 +25,7 @@ struct ContentView: View {
             .padding()
           
             Button(action: {
-                password = generator.generate(length: length)
+                password = generator.generate(type: .normal(length))
             }) {
                 Text("Generate")
             }

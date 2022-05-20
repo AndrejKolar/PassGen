@@ -31,7 +31,7 @@ class UnitTests_macOS: XCTestCase {
     func testDefaultPasswordLength() {
         XCTAssertEqual(
             sut.generate().count,
-            PasswordGenerator.Defaults.lenght,
+            PasswordGenerator.Defaults.length,
             "Password is not the default length"
         )
     }
@@ -39,7 +39,7 @@ class UnitTests_macOS: XCTestCase {
     func testCustomPasswordLength() {
         let length = 17
         XCTAssertEqual(
-            sut.generate(length: length).count,
+            sut.generate(type: .normal(length)).count,
             length,
             "Password is not the passed in length"
         )
@@ -59,43 +59,41 @@ class UnitTests_macOS: XCTestCase {
     }
     
     func testOnlyNumbers() {
-        let password = sut.generate(options: [.numbers])
+        let password = sut.generate(characters: [.numbers])
         let isNumeric = checkCharacters(password, type: .numbers)
         XCTAssertTrue(isNumeric, "Password is not number only")
     }
-    
+
     func testOnlyLowerCase() {
-        let password = sut.generate(options: [.lowercase])
+        let password = sut.generate(characters: [.lowercase])
         let isLowercase = checkCharacters(password, type: .lowercase)
         XCTAssertTrue(isLowercase, "Password should contain only lowercase letters")
     }
-    
+
     func testOnlyUppercase() {
-        let password = sut.generate(options: [.uppercase])
+        let password = sut.generate(characters: [.uppercase])
         let isUppercase = checkCharacters(password, type: .uppercase)
         XCTAssertTrue(isUppercase, "Password should contain only uppercase letters")
     }
-    
+
     func testOnlySymbols() {
-        let password = sut.generate(options: [.symbols])
+        let password = sut.generate(characters: [.symbols])
         let isSymbol = checkCharacters(password, type: .symbols)
-        
+
         XCTAssertTrue(isSymbol, "Password should contain only symbols")
     }
-    
+
     func testSeparators() {
         let wordLength = 4
         let wordCount = 4
-         
+
         let length = lengthWithSeparator(wordLength: wordLength, wordCount: wordCount)
-        
-        let password = sut.generateWithSeparator(
-            wordLength: wordLength,
-            wordCount: wordCount,
-            options: [.uppercase],
-            separator: .verticalBar
+
+        let password = sut.generate(
+            type: .separated(wordLength, wordCount, .verticalBar),
+            characters: [.uppercase]
         )
-        
+
         XCTAssertEqual(
             password.count,
             length,

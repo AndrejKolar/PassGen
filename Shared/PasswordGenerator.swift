@@ -9,23 +9,22 @@ import Foundation
 
 struct PasswordGenerator {
     public struct Defaults {
-        static let lenght = 16
+        static let length = 16
         static let wordLength = 8
         static let wordCount = 4
-        static let options: Set<CharacterType> = [
+        static let type: PasswordType = .normal(Defaults.length)
+        static let characters: Set<CharacterType> = [
             .uppercase,
             .lowercase,
             .numbers,
             .symbols
         ]
-        static let separator: SeparatorType = .hyphen
+        static let separator: SeparatorType = .space
     }
     
-    public struct Options {
-        let upperCase: Bool
-        let lowerCase: Bool
-        let numbers: Bool
-        let symbols: Bool
+    enum PasswordType {
+        case normal(Int)
+        case separated(Int, Int, SeparatorType)
     }
     
     enum CharacterType: String {
@@ -43,45 +42,43 @@ struct PasswordGenerator {
         case verticalBar = "|"
     }
     
-    public func generate(length: Int? = nil, options: Set<CharacterType>? = nil) -> String {
-        let passwordLength = length ?? Defaults.lenght
-        let passwordOptions = options ?? Defaults.options
-        
-        let charactersArray = passwordOptions.map {
-            $0.rawValue
-        }
-        
-        let password = (0..<passwordLength)
-            .compactMap { _ in charactersArray.randomElement() }
-            .compactMap { $0.randomElement() }
-        
-        return String(password)
-    }
-    
-    public func generateWithSeparator(
-        wordLength: Int? = nil,
-        wordCount: Int? = nil,
-        options: Set<CharacterType>? = nil,
+    public func generate(
+        type: PasswordType? = nil,
+        characters: Set<CharacterType>? = nil,
         separator: SeparatorType? = nil
     ) -> String {
-        let passwordOptions = options ?? Defaults.options
-        let separatorOptions = separator ?? Defaults.separator
-        let passwordWordLength = wordLength ?? Defaults.wordLength
-        let passwordWordCount = wordCount ?? Defaults.wordCount
         
-        let separatorCount = passwordWordCount - 1
-        let passwordLength = (passwordWordLength * passwordWordCount) + (separatorCount)
+        var passwordLength = Defaults.length
         
-        let charactersArray = passwordOptions.map { $0.rawValue }
-        let separatorCharacter = separatorOptions.rawValue
+        var separatorIndices: [Int] = []
+        var separatorCharacter = Defaults.separator.rawValue
         
-        let separatorIndices = (0..<separatorCount)
-            .compactMap { index in
-                ((index + 1) * passwordWordLength) + (index * 1)
-            }
+        let typeOption = type ?? Defaults.type
+        switch typeOption {
+        case .normal(let length):
+            passwordLength = length
+            
+        case .separated(let wordLength, let wordCount, let separator):
+            let separatorCount = wordCount - 1
+            passwordLength = (wordLength * wordCount) + (separatorCount)
+            
+            separatorIndices = (0..<separatorCount)
+                .compactMap { index in
+                    ((index + 1) * wordLength) + (index * 1)
+                }
+            
+            separatorCharacter = separator.rawValue
+        }
         
+        let characterOptions = characters ?? Defaults.characters
+        let charactersArray = characterOptions.map { $0.rawValue }
+
         let characterArrays: [String] = (0..<passwordLength)
             .compactMap { index in
+                guard case .separated = typeOption else {
+                    return charactersArray.randomElement()
+                }
+                
                 let isSeparator = separatorIndices.contains(index)
                 
                 return isSeparator ? separatorCharacter : charactersArray.randomElement()
