@@ -83,7 +83,7 @@ class UnitTests_macOS: XCTestCase {
         XCTAssertTrue(isSymbol, "Password should contain only symbols")
     }
 
-    func testSeparators() {
+    func testWithSeparatorsLength() {
         let wordLength = 4
         let wordCount = 4
 
@@ -101,6 +101,28 @@ class UnitTests_macOS: XCTestCase {
         )
     }
     
+    func testWithSeparatorsCharacters() {
+        let wordLength = 4
+        let wordCount = 4
+
+        let password = sut.generate(
+            type: .separated(wordLength, wordCount, .verticalBar),
+            characters: [.uppercase]
+        )
+        
+        XCTAssertTrue(checkIfSeparator(password, index: 4, separator: "|"), "Character is not a separator")
+        XCTAssertTrue(checkIfSeparator(password, index: 9, separator: "|"), "Character is not a separator")
+        XCTAssertTrue(checkIfSeparator(password, index: 14, separator: "|"), "Character is not a separator")
+        
+        XCTAssertFalse(checkIfSeparator(password, index: 1, separator: "|"), "Separator at wrong place")
+        XCTAssertFalse(checkIfSeparator(password, index: 10, separator: "|"), "Separator at wrong place")
+        XCTAssertFalse(checkIfSeparator(password, index: 13, separator: "|"), "Separator at wrong place")
+        
+        XCTAssertFalse(checkIfSeparator(password, index: 4, separator: "_"), "Wrong separator character")
+        XCTAssertFalse(checkIfSeparator(password, index: 9, separator: " "), "Wrong separator character")
+        XCTAssertFalse(checkIfSeparator(password, index: 14, separator: "/"), "Wrong separator character")
+    }
+    
     // Helpers
     
     private func checkCharacters(_ password: String, type: PasswordGenerator.CharacterType) -> Bool {
@@ -112,5 +134,10 @@ class UnitTests_macOS: XCTestCase {
     
     private func lengthWithSeparator(wordLength: Int, wordCount: Int) -> Int {
         (wordLength * wordCount) + (wordCount - 1)
+    }
+    
+    private func checkIfSeparator(_ password: String, index: Int, separator: Character) -> Bool {
+        let char = password[password.index(password.startIndex, offsetBy: index)]
+        return char == separator
     }
 }
