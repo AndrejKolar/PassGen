@@ -83,6 +83,26 @@ class UnitTests_macOS: XCTestCase {
         XCTAssertTrue(isSymbol, "Password should contain only symbols")
     }
     
+    func testSeparators() {
+        let wordLength = 4
+        let wordCount = 4
+         
+        let length = lengthWithSeparator(wordLength: wordLength, wordCount: wordCount)
+        
+        let password = sut.generateWithSeparator(
+            wordLength: wordLength,
+            wordCount: wordCount,
+            options: [.uppercase],
+            separator: .verticalBar
+        )
+        
+        XCTAssertEqual(
+            password.count,
+            length,
+            "Password is not the correct length"
+        )
+    }
+    
     // Helpers
     
     private func checkCharacters(_ password: String, type: PasswordGenerator.CharacterType) -> Bool {
@@ -90,5 +110,9 @@ class UnitTests_macOS: XCTestCase {
         let passwordCharacterSet = CharacterSet(charactersIn: password)
         return passwordCharacterSet.isSubset(of: typeCharacterSet)
         
+    }
+    
+    private func lengthWithSeparator(wordLength: Int, wordCount: Int) -> Int {
+        (wordLength * wordCount) + (wordCount - 1)
     }
 }
