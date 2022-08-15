@@ -3,7 +3,7 @@
 Swift CLI app for generating passwords.
 
 ## Use
-Run the app with the flag `-h` to see root level options
+Run the app with the flag `-h` to see root level options. The app supports normal (random character string) and separated (random grouped characters separated by a separator character) password types.
 <img width="1082" alt="Screenshot 2022-08-15 at 15 29 19" src="https://user-images.githubusercontent.com/1213228/184645800-22a75a98-e074-4800-b67e-c08792f6c83f.png">
 
 ### Normal
