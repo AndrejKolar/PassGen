@@ -23,6 +23,9 @@ Run `swift test` to run the unit test suite
 <img width="1082" alt="Screenshot 2022-08-15 at 15 34 09" src="https://user-images.githubusercontent.com/1213228/184646122-561fcebe-3ab6-47cb-98db-36d920be3aec.png">
 
 ## Build
-To build an executable version of the app run `swift build`. 
-<img width="1082" alt="Screenshot 2022-11-09 at 22 29 12" src="https://user-images.githubusercontent.com/1213228/200945743-b4b4161f-e2a1-4626-bf4e-1655273178f8.png">
+To build an executable version of the app run `swift build -c release`
+<img width="1082" alt="Screenshot 2022-11-09 at 23 29 30" src="https://user-images.githubusercontent.com/1213228/200956205-9c297f9c-050f-4e56-a74f-9b24c2dce909.png">
 
+## Run
+Move the executable to `/usr/local/bin` and run with `PassGen`
+<img width="1082" alt="Screenshot 2022-11-09 at 23 28 19" src="https://user-images.githubusercontent.com/1213228/200956381-1c38e457-d18a-4a12-824d-7dbc66424ddb.png">
