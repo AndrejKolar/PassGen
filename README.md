@@ -24,4 +24,5 @@ Run `swift test` to run the unit test suite
 
 ## Build
 To build an executable version of the app run `swift build`. 
-<img width="1082" alt="Screenshot 2022-08-15 at 15 40 29" src="https://user-images.githubusercontent.com/1213228/184646389-47001c43-7d43-438b-b660-9d81d04a2a2a.png">
+<img width="1082" alt="Screenshot 2022-11-09 at 22 29 12" src="https://user-images.githubusercontent.com/1213228/200945743-b4b4161f-e2a1-4626-bf4e-1655273178f8.png">
+
